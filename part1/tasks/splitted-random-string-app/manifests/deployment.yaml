@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: datehash-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: datehash 
+  template:
+    metadata:
+      labels:
+        app: datehash 
+    spec:
+      volumes:
+        - name: datelog
+          emptyDir: {}
+      containers:
+        - name: date
+          image: penao7/date
+          volumeMounts:
+          - name: datelog
+            mountPath: /usr/app/
+        - name: hash
+          image: penao7/hash
+          volumeMounts:
+          - name: datelog
+            mountPath: /usr/app/
