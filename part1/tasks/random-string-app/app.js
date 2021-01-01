@@ -1,17 +1,24 @@
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3000;
 const uuid = require("uuid");
 
 const randomString = uuid.v4();
-const date = new Date().toISOString();
+
+const getDate = () => {
+ return new Date().toISOString();
+};
 
 const output = () => {
-  console.log(`${date}: ${randomString}`);
-}
+  return `${getDate()}: ${randomString}`;
+};
 
-output();
+app.get('/', (req,res) => {
+  res.send(output());
+});
 
-
-setInterval(() => {
-  output();
-}, 5000);
+app.listen(port, () => {
+  console.log(`listening port ${port}`);
+});
 
 
