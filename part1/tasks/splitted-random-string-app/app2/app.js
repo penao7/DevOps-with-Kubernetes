@@ -54,7 +54,7 @@ const output = async () => {
     currentHash = generateHash();
   };
 
-  return `${currentDate}: ${currentHash}\npings / pongs: ${pingpong}`
+  return `${currentDate}: ${currentHash}\npings / pongs: ${pingpong ? pingpong : '0'}`
 
 };
 
