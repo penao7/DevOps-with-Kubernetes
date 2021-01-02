@@ -6,9 +6,8 @@ const path = require("path");
 const fs = require('fs').promises;
 
 const directory = path.join('/', 'usr', 'app');
-const filePath = path.join(directory, 'date.txt'); 
-
-console.log(filePath);
+const datePath = path.join(directory, 'date.txt'); 
+const pingPongPath = path.join(directory, 'pingpong.txt');
 
 const generateHash = () => {
   return uuid.v4();
@@ -19,8 +18,17 @@ let currentDate = '';
 
 const getDate = async () => {
   try {
-    const data = await fs.readFile(filePath, 'utf-8');
+    const data = await fs.readFile(datePath, 'utf-8');
     return data;
+  } catch (err) {
+    console.log(err);
+  };
+};
+
+const getPingPong = async () => {
+  try {
+    const pingpong = await fs.readFile(pingPongPath, 'utf-8');
+    return pingpong;
   } catch (err) {
     console.log(err);
   };
@@ -40,19 +48,18 @@ const checkIfDateChanged = async () => {
 
 const output = async () => {
 
+  const pingpong = await getPingPong();
+
   if(await checkIfDateChanged()) {
     currentHash = generateHash();
   };
 
-  return {
-    date: currentDate,
-    hash: currentHash
-  }
+  return `${currentDate}: ${currentHash}\npings / pongs: ${pingpong}`
 
 };
 
 app.get('/', async (req,res) => {
-  res.json(await output());
+  res.end(await output());
 });
 
 app.listen(port, () => {

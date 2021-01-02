@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: datehash-dep
+  name: pingpongdate-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: datehash 
+      app: pingpongdate
   template:
     metadata:
       labels:
-        app: datehash 
+        app: pingpongdate
     spec:
       volumes:
         - name: datelog
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: pingpongdate-claim
       containers:
         - name: date
           image: penao7/date
@@ -23,6 +24,11 @@ spec:
             mountPath: /usr/app/
         - name: hash
           image: penao7/hash
+          volumeMounts:
+          - name: datelog
+            mountPath: /usr/app/
+        - name: pingpong
+          image: penao7/pingpong
           volumeMounts:
           - name: datelog
             mountPath: /usr/app/

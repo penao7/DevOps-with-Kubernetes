@@ -1,18 +1,31 @@
 const express = require('express')
+const fs = require('fs').promises;
 const app = express();
 const port = process.env.PORT || 4000;
+const path = require('path');
+
+const directory = path.join('/', 'usr', 'app');
+const filePath = path.join(directory, 'pingpong.txt');
 
 let pong = 0;
 
-
-const incrementOnGet = () => {
-  pong++;
-  return pong;
+const output = () => {
+  return `${pong}`;
 };
 
+const incrementOnGet = async () => {
+  pong++;
 
-app.get('/', (req, res) => {
-  res.end(`pong ${incrementOnGet()}`);
+  try {
+    await fs.writeFile(filePath, output());
+    return pong;
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+app.get('/', async (req, res) => {
+  res.end(`pong ${await incrementOnGet()}`);
 });
 
 app.listen(port, () => {

@@ -4,8 +4,6 @@ const path = require('path');
 const directory = path.join('/', 'usr', 'app')
 const filePath = path.join(directory, 'date.txt')
 
-console.log(filePath);
-
 const checkFolderPath = async () => {
   try {
     await fs.promises.access(filePath);
