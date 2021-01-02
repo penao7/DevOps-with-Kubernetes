@@ -26,7 +26,7 @@ const checkThatFileExist = async () => {
 const getPingPong = async () => {
   try {
     const pingpong = fs.readFile(filePath, 'utf-8');
-    console.log('pingpongs fetched from pongpong.txt');
+    console.log('pingpongs fetched from pingpong.txt');
     return pingpong;
   } catch (err) {
     console.log(err);
