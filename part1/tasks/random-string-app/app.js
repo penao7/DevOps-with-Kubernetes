@@ -3,14 +3,17 @@ const app = express();
 const port = process.env.PORT || 3000;
 const uuid = require("uuid");
 
-const randomString = uuid.v4();
+
+const getRandomString = () => {
+  return uuid.v4();
+};
 
 const getDate = () => {
  return new Date().toISOString();
 };
 
 const output = () => {
-  return `${getDate()}: ${randomString}`;
+  return `${getDate()}: ${getRandomString()}`;
 };
 
 app.get('/', (req,res) => {
