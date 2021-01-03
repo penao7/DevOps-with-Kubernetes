@@ -1,0 +1,17 @@
+{
+  "name": "random_string_app",
+  "version": "1.0.0",
+  "description": "when launched, creates random string and outputs it every 5 seconds with a timestamp",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "uuid": "^8.3.2"
+  }
+}
