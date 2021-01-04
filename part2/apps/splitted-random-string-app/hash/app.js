@@ -9,6 +9,7 @@ const axios = require('axios');
 const directory = path.join('/', 'usr', 'app');
 const datePath = path.join(directory, 'date.txt'); 
 const pingPongPath = path.join(directory, 'pingpong.txt');
+const message = process.env.MESSAGE || 'message not set';
 
 const generateHash = () => {
   return uuid.v4();
@@ -55,7 +56,7 @@ const output = async () => {
     currentHash = generateHash();
   };
 
-  return `${currentDate}: ${currentHash}\npings / pongs: ${pongs}`
+  return `${message}\n${currentDate}: ${currentHash}\npings / pongs: ${pongs}`
 
 };
 

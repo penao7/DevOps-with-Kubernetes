@@ -25,6 +25,12 @@ spec:
             mountPath: /usr/app/
         - name: hash
           image: penao7/hash
+          env:
+            - name: MESSAGE 
+              valueFrom:
+                configMapKeyRef:
+                  name: hello-configmap
+                  key: MESSAGE
           volumeMounts:
           - name: datelog
             mountPath: /usr/app/

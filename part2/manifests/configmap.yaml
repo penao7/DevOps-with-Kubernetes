@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-configmap
+  namespace: pingpongdatehash
+data:
+  MESSAGE: "Hello"

@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: datehash-ingress
+  namespace: pingpongdatehash
   annotations:
     traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
 spec:
