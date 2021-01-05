@@ -3,30 +3,34 @@ const fs = require('fs').promises;
 const app = express();
 const port = process.env.PORT || 4000;
 const path = require('path');
+const { Client } = require('pg');
+const db = require('./db');
 
-const directory = path.join('/', 'usr', 'app');
-const filePath = path.join(directory, 'pingpong.txt');
+db.client.connect();
+db.initialDBContent();
 
-let pong = '';
-
-const output = () => {
-  
-  const output = {
-    pings: pong 
-  };
-
-  return output;
+const output = async () => {
+  try {
+    const res = await db.client.query('SELECT pongs FROM pings;');
+    return res.rows[0];
+  } catch (err) {
+    console.log(err)
+  }
 };
 
 const incrementOnGet = async () => {
-  pong++;
+  try {
+    await db.client.query('UPDATE pings SET pongs = pongs + 1;');
+  } catch (err) {
+    console.log(err)
+  }
 };
 
 app.get('/', async (req, res) => {
   incrementOnGet();
-  res.json(output());
+  res.json(await output());
 });
 
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`server running at port ${port}`)
 });

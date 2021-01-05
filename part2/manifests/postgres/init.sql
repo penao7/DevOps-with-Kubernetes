@@ -1,0 +1,2 @@
+CREATE DATABASE pingpong;
+CREATE TABLE pings(pings INTEGER NOT NULL);

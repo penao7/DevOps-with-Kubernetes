@@ -20,6 +20,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: pingpong-svc
+            name: pingpong
             port:
               number: 1234

@@ -11,4 +11,4 @@ spec:
     - port: 2345
       name: hashport
       protocol: TCP
-      targetPort: 3000 
+      targetPort: 3500 

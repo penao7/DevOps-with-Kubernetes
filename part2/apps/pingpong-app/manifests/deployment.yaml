@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pingpong-dep
+  name: pingpong
   namespace: pingpongdatehash
 spec:
   replicas: 1
@@ -15,5 +15,11 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: penao7/pingpong:http1
+          image: penao7/pingpong
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db
+                  key: postgres_password
 

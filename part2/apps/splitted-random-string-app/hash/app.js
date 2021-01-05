@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3500;
 const uuid = require("uuid");
 const path = require("path");
 const fs = require('fs').promises;
@@ -21,7 +21,7 @@ let currentDate = '';
 const getPongs = async () => {
   try {
     const response = await axios.get('http://pingpong');
-    return response.data.pings;
+    return response.data.pongs;
   } catch (err) {
     console.log(err);
   }
