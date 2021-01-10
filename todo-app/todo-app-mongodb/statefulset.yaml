@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-svc
+  namespace: todo-app
+  labels:
+    app: mongo
+spec:
+  ports:
+  - port: 27017
+    name: web
+  clusterIP: None
+  selector:
+    app: mongo
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: todo-app
+  name: mongodb
+spec:
+  serviceName: mongo-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      volumes:
+      - name: mongo-initdb
+        configMap:
+          name: mongo-initdb 
+      containers:
+        - name: todo-mongo
+          image: mongo
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pw
+                  key: ROOT_PASSWORD
+            - name: TODO_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pw
+                  key: TODO_PASSWORD
+            - name: TODO_USER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pw
+                  key: TODO_USERNAME
+          ports:
+            - name: web
+              containerPort: 27017
+          volumeMounts:
+            - name: data
+              mountPath: /tmp/todo/data
+            - name: mongo-initdb
+              mountPath: /docker-entrypoint-initdb.d
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        namespace: todo-app
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: local-path
+        resources:
+          requests:
+            storage: 100Mi

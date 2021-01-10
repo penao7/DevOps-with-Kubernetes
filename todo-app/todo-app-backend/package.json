@@ -1,0 +1,22 @@
+{
+  "name": "todo-app-backend",
+  "version": "1.0.0",
+  "description": "graphql backend for todo-app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Pentti Oinonen",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.19.1",
+    "eslint": "^7.17.0",
+    "graphql": "^15.4.0",
+    "mongoose": "^5.11.10",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

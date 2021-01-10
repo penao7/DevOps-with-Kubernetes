@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: todo-graphql
+  namespace: todo-app
+spec:
+  type: ClusterIP
+  selector:
+    app: todo-graphql
+  ports:
+    - name: http
+      protocol: TCP
+      port: 4444
+      targetPort: 4000

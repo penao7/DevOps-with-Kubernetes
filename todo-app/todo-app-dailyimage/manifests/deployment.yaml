@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-backend-dep
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-backend
+  template:
+    metadata:
+      labels:
+        app: todo-backend
+    spec:
+      volumes:
+        - name: shared-todo
+          persistentVolumeClaim:
+            claimName: todo-claim
+      containers:
+        - name: todo-backend
+          image: penao7/todo-dailyimage
+          volumeMounts:
+          - name: shared-todo
+            mountPath: /usr/app
+

@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  border-color: 10px;
+}
+
+.image {
+  width: 300;
+  height: 300;
+}

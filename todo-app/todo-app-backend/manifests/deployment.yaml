@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-graphql-dep
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-graphql
+  template:
+    metadata:
+      labels:
+        app: todo-graphql
+    spec:
+      containers:
+        - name: todo-graphql
+          image: penao7/todo-graphql-backend
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: TODO_USER_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pw
+                  key: TODO_USERNAME
+            - name: TODO_USER_PASSWORD 
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-pw
+                  key: TODO_PASSWORD
+
