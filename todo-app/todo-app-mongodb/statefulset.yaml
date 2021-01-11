@@ -59,7 +59,7 @@ spec:
               containerPort: 27017
           volumeMounts:
             - name: data
-              mountPath: /tmp/todo/data
+              mountPath: /data/db
             - name: mongo-initdb
               mountPath: /docker-entrypoint-initdb.d
   volumeClaimTemplates:
@@ -68,7 +68,7 @@ spec:
         namespace: todo-app
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
+        storageClassName: mongo
         resources:
           requests:
             storage: 100Mi

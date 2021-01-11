@@ -6,12 +6,15 @@ const todoSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    minlenght: 4,
+    minLength: 4,
+    maxLength: 140,
     uniqueCaseInsensitive: true
   },
   date: Date,
   important: Boolean
-});
+}, 
+  { runValidators: true }
+);
 
 todoSchema.plugin(uniqueValidator);
 
