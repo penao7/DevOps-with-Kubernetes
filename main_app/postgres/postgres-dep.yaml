@@ -26,8 +26,8 @@ spec:
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: db
-                  key: postgres_password
+                  name: db-secret
+                  key: POSTGRES_PASSWORD
           volumeMounts:
             - name: data
               mountPath: /usr/app
@@ -37,7 +37,6 @@ spec:
         namespace: pingpongdatehash
       spec:
         accessModes: ["ReadWriteOnce"]
-        storageClassName: local-path
         resources:
           requests:
             storage: 100Mi

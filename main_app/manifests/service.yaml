@@ -4,7 +4,7 @@ metadata:
   name: datehash-svc
   namespace: pingpongdatehash
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: datehash 
   ports:

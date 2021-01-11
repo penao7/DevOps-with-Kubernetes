@@ -4,7 +4,6 @@ metadata:
   name: pingpongdate-claim
   namespace: pingpongdatehash
 spec:
-  storageClassName: manual
   accessModes:
     - ReadWriteOnce
   resources:
