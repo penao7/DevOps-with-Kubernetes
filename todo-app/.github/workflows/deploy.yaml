@@ -1,0 +1,106 @@
+name: Release application
+
+on:
+  push:
+
+env:
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-north1-b
+  GRAPHQL: todo-graphql 
+  DAILYIMAGE: todo-dailyimage
+  FRONTEND: todo-frontend
+  MONGO_DIR: ./todo-app-mongodb
+  GRAPHQL_DIR: ./todo-app-graphql
+  DAILYIMAGE_DIR: ./todo-app-dailyimage
+  FRONTEND_DIR: ./todo-app-frontend
+
+jobs:
+  build-publish-deploy:
+    name: Build, Publish and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT_ID }}
+    
+    - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
+    - run: gcloud --quiet auth configure-docker
+
+    - name: Deploy MongoDB
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+        ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+        kubectl apply -k .
+      working-directory: ${{ env.MONGO_DIR }}
+
+    - name: Create image name and tag for GraphQL
+      run: echo "GRAPHQL_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT_ID }}/$GRAPHQL:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+
+    - name: Build GraphQL
+      run: docker build -t "$GRAPHQL_WITH_TAG" .
+      working-directory: ${{ env.GRAPHQL_DIR }}
+
+    - name: Publish GraphQL
+      run: docker push "$GRAPHQL_WITH_TAG"
+
+    - name: Deploy GraphQL
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+        ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+        ./kustomize edit set image PROJECT/IMAGE=$GRAPHQL_WITH_TAG
+        kubectl apply -k .
+      working-directory: ${{ env.GRAPHQL_DIR }}
+
+    - name: Create image name and tag for dailyimage
+      run: echo "DAILYIMAGE_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT_ID }}/$DAILYIMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+          
+    - name: Build dailyimage
+      run: docker build -t "$DAILYIMAGE_WITH_TAG" .
+      working-directory: ${{ env.DAILYIMAGE_DIR }}
+          
+    - name: Publish dailyimage
+      run: docker push "$DAILYIMAGE_WITH_TAG"
+          
+    - name: Deploy dailyimage
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+        ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+        ./kustomize edit set image PROJECT/IMAGE=$DAILYIMAGE_WITH_TAG
+        kubectl apply -k .
+      working-directory: ${{ env.DAILYIMAGE_DIR }}
+
+    - name: Create image name and tag for Frontend
+      run: echo "FRONTEND_WITH_TAG=gcr.io/${{ secrets.GKE_PROJECT_ID }}/$FRONTEND:${GITHUB_REF#refs/heads/}-$GITHUB_SHA" >> $GITHUB_ENV
+          
+    - name: Build frontend
+      run: docker build -t "$FRONTEND_WITH_TAG" .
+      working-directory: ${{ env.FRONTEND_DIR }}
+          
+    - name: Publish frontend
+      run: docker push "$FRONTEND_WITH_TAG"
+          
+    - name: Deploy frontend
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        kubectl create namespace ${GITHUB_REF#refs/heads/} || true
+        kubectl config set-context --current --namespace=${GITHUB_REF#refs/heads/}
+        ./kustomize edit set namespace ${GITHUB_REF#refs/heads/}
+        ./kustomize edit set image PROJECT/IMAGE=$FRONTEND_WITH_TAG
+        kubectl apply -k .
+      working-directory: ${{ env.FRONTEND_DIR }}

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: todo-claim
+  name: dailyimage-claim
   namespace: todo-app
 spec:
-  storageClassName: manual
+  # storageClassName: manual # UNCOMMENT FOR LOCAL TESTING
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 50Mi

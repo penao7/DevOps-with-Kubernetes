@@ -3,8 +3,6 @@ kind: Service
 metadata: 
   name: todo-dailyimage
   namespace: todo-app
-    #  annotations:
-    #cloud.google.com/backend-config: '{"default": "dailyimage-backendcfg"}'
 spec:
   type: ClusterIP
   selector:

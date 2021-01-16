@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-ingress
+  namespace: todo-app
+  annotations:
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: todo-frontend
+            port: 
+              number: 8888
+      - path: /images
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-dailyimage
+            port:
+              number: 80 
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: todo-graphql
+            port:
+              number: 4444

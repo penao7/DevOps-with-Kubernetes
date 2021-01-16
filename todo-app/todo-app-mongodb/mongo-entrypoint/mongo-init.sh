@@ -1,8 +1,11 @@
+#!/bin/bash
+set -e
+
 mongo <<EOF
 use todo-app
 db.createUser({
-  user: '$TODO_USER_USERNAME',
-  pwd:  '$TODO_USER_PASSWORD',
+  user: '$TODO_USERNAME',
+  pwd:  '$TODO_PASSWORD',
   roles: [{
     role: 'readWrite',
     db: 'todo-app'

@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  create_secure_user.sh: |
+    mongo <<EOF
+    use todo-app
+    db.createUser({
+      user: '$TODO_USERNAME',
+      pwd:  '$TODO_PASSWORD',
+      roles: [{
+        role: 'readWrite',
+        db: 'todo-app'
+      }]
+    })
+    EOF
+kind: ConfigMap
+metadata:
+  name: mongo-initdb
+  namespace: todo-app
+

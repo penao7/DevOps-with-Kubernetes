@@ -4,7 +4,8 @@ metadata:
   name: todo-frontend
   namespace: todo-app
 spec:
-  type: NodePort 
+  type: LoadBalancer 
+  loadBalancerIP: 35.228.105.181
   selector:
     app: todo-frontend
   ports:

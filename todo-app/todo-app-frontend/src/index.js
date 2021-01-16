@@ -4,7 +4,7 @@ import Main from './components/App';
 
 import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
-const url = process.env.REACT_APP_API_URL;
+const url = process.env.REACT_APP_API_URL || 'localhost:4000/graphql';
 
 const client = new ApolloClient({
   cache: new InMemoryCache({
@@ -21,7 +21,7 @@ const client = new ApolloClient({
     }
   }),
   link: new HttpLink({
-    uri: url
+    uri: `http://${url}`
   })
 })
 

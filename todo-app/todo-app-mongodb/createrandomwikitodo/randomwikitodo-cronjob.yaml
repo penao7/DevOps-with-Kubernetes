@@ -4,7 +4,7 @@ metadata:
   name: randomwikitodo
   namespace: todo-app
 spec:
-  schedule: "0 0 * * *"
+  schedule: "* * * * *"
   jobTemplate:
     spec:
       template:

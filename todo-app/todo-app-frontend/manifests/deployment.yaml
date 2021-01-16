@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-frontend-dep
-  namespace: todo-app
+  name: todo-frontend
+  namespace: master
 spec:
   replicas: 1
   selector:
@@ -14,8 +14,5 @@ spec:
         app: todo-frontend
     spec:
       containers:
-        - name: todo-frontend
-          image: penao7/todo-frontend
-          env:
-            - name: API_URL
-              value: http://192.168.1.198:8081/api
+        - name: frontend
+          image: PROJECT/IMAGE

@@ -2,6 +2,9 @@
 
 UI for Todo CRUD
 
+Dailyimage
+MongoDB for saving Todos via GraphQL
+
 ### Usage
 
 Intented to be deployed with kubernetes using deployment.yaml from manifests folder, which builds the frontend and serves it with nginx in a port 80.

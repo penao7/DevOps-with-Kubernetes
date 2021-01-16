@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: todo-dailyimage
+  name: todo-dailyimage-dep
   namespace: todo-app
 spec:
   replicas: 1
@@ -19,7 +19,7 @@ spec:
             claimName: dailyimage-claim
       containers:
         - name: dailyimage
-          image: PROJECT/IMAGE 
+          image: penao7/todo-dailyimage 
           ports:
           - containerPort: 8000
           volumeMounts:
