@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  # PostGres
+  - ./postgres/sealed-db-secret.yaml
+  - ./postgres/postgres-dep.yaml
+  - ./postgres/postgres-svc.yml
+  # PingPong
+  - ./pingpong-app/manifests/horizontalpodautoscaler.yaml
+  - ./pingpong-app/manifests/ingress.yaml
+  - ./pingpong-app/manifests/internal-service.yaml
+  - ./pingpong-app/manifests/deployment.yaml
+  # Date & Hash
+  - ./manifests/configmap.yaml
+  - ./manifests/deployment.yaml
+  - ./manifests/horizontalpodautoscaler.yaml
+  - ./manifests/ingress-gke.yaml
+  - ./manifests/persistentvolumeclaim.yaml
+  - ./manifests/service.yaml
+
