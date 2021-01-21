@@ -35,6 +35,8 @@ spec:
                 configMapKeyRef:
                   name: hello-configmap
                   key: MESSAGE
+          ports:
+          - containerPort: 3500
           resources:
             limits:
               cpu: "150m"
@@ -42,3 +44,11 @@ spec:
           volumeMounts:
           - name: datelog
             mountPath: /usr/app/
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            exec:
+              command:
+                - "wget"
+                - "-qO-"
+                - "pingpong"

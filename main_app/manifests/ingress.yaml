@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1 
+kind: Ingress
+metadata:
+  name: datehashpingpong-ingress
+  namespace: pingpongdatehash
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: todo-app-ip
+spec:
+  rules:
+  - host: app2.todo.penao.me
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: datehash-svc
+          servicePort: 80

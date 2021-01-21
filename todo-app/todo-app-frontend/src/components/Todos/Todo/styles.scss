@@ -1,0 +1,39 @@
+@use 'src/styles/button';
+@use 'src/styles/colors';
+@use 'src/styles/constants';
+
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  text-overflow: ellipsis;
+  justify-content: center;
+  padding: 5px
+}
+
+.wrapContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 5px;
+  border: 1px solid black
+}
+
+.deleteButton {
+  @include button.style;
+  background-color: colors.$danger;
+
+  &:hover {
+    background-color: colors.$dangerHover;
+  }
+
+  &:active {
+    background-color: colors.$danger;
+  }
+}
+
+li {
+  @include constants.listStyle;
+}

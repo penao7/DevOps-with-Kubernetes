@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-broadcaster
+  namespace: todo-app
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: broadcaster
+  template:
+    metadata:
+      labels:
+        app: broadcaster
+    spec:
+      containers:
+        - name: broadcaster 
+          image: penao7/todo-broadcaster 
+          env:
+            - name: NATS_URL
+              value: nats://my-nats:4222 
+            - name: BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: bot-token
+                  key: BOT_TOKEN

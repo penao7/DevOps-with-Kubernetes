@@ -16,6 +16,8 @@ spec:
       containers:
         - name: pingpong
           image: penao7/pingpong
+          ports:
+          - containerPort: 4000 
           resources:
             limits:
               cpu: "50m"
@@ -26,4 +28,11 @@ spec:
                 secretKeyRef:
                   name: db-secret
                   key: POSTGRES_PASSWORD
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 4000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
 

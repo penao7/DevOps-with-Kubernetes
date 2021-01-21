@@ -7,6 +7,8 @@ export const CREATE_TODO = gql`
     ) {
       content
       important
+      done
+      createdAt
     }
   }
 `
@@ -20,4 +22,19 @@ export const DELETE_TODO = gql`
       id
     }
   }
+`
+
+export const EDIT_TODO = gql`
+  mutation editTodo($id: ID!, $done: Boolean) {
+    editTodo(
+      id: $id
+      done: $done
+    ) {
+      id
+      content
+      done
+      important
+    }
+  }
+
 `

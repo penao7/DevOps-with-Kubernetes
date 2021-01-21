@@ -6,6 +6,9 @@ export const ALL_TODOS = gql`
       content
       important
       id
+      done
+      createdAt
+      markedDoneAt
     }
   }
 `

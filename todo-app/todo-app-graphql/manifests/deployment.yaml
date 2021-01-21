@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: graphql
-          image: PROJECT/IMAGE
+          image: penao7/todo-graphql
           ports:
             - containerPort: 4000
           env:
@@ -31,15 +31,17 @@ spec:
                 secretKeyRef:
                   name: mongodb-pw
                   key: TODO_PASSWORD
+            - name: NATS_URL
+              value: nats://my-nats:4222
           livenessProbe:
             httpGet:
               path: /.well-known/apollo/server-health
               port: 4000
-            initialDelaySeconds: 10
-            periodSeconds: 2
+            initialDelaySeconds: 15
+            periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /.well-known/apollo/server-health
               port: 4000
-            initialDelaySeconds: 10
-            periodSeconds: 2
+            initialDelaySeconds: 5
+            periodSeconds: 10

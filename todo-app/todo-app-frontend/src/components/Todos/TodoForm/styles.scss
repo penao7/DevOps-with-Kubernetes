@@ -1,0 +1,49 @@
+@use 'src/styles/colors';
+
+.inputErrorContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.todoValidationSuccessful {
+  @extend .inputErrorContainer;
+  margin: 14px;
+}
+
+.todoValidationError {
+  @extend .inputErrorContainer;
+  color: colors.$danger;
+  margin: 5px;
+}
+
+.border {
+  width: 200px;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #ccc;
+  outline: none;
+  padding: 6px;
+}
+
+.input {
+  border-radius: 10px;
+}
+
+.inputSuccess {
+  @extend .input;
+  @extend .border;
+  border-color: colors.$success;
+  outline: colors.$success !important;
+}
+
+.inputError {
+  @extend .input;
+  @extend .border;
+  border-color: colors.$danger;
+  outline: colors.$danger !important;
+}
+
+textarea {
+  background-color: colors.$danger;
+  padding: 50px;
+}

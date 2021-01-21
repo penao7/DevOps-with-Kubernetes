@@ -1,0 +1,15 @@
+{
+  "name": "todo-app-broadcaster",
+  "version": "1.0.0",
+  "description": "A bot to send messages to telegram via NATS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nats": "^1.4.12",
+    "node-telegram-bot-api": "^0.51.0"
+  }
+}

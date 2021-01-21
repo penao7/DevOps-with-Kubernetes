@@ -10,12 +10,14 @@ const Query = `
     createTodo(
       content: String!
       important: Boolean = false
+      done: Boolean = false
     ): Todo
     deleteTodo(id: ID!): Todo
     editTodo(
       id: ID!
       content: String
       important: Boolean = false
+      done: Boolean = false
     ): Todo
   }
 `

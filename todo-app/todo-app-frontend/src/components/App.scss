@@ -1,8 +1,41 @@
-.container {
+@use 'src/styles/constants';
+
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.leftContainer {
+  display: flex;
+  width: 100%
+}
+
+.middleContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  width: 100%
+}
+
+.rightContainer {
+  display: flex;
+  width: 100%;
+}
+
+.doneTodos {
+  overflow: auto;
+  height: 500px;
+  width: 400px;
+}
+
+li {
+  @include constants.listStyle;
 }
 
 .rowContainer {
@@ -10,11 +43,15 @@
   flex-direction: row;
 }
 
-.button {
-  border-color: 10px;
-}
-
 .image {
   width: 300;
   height: 300;
+}
+
+@media screen and (max-width: 480px) {
+  .mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

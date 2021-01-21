@@ -1,28 +1,14 @@
-$danger: red;
-$success: green;
-
-.todo {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 20px;
-  width: 300px;
-}
+@use 'src/styles/button';
+@use 'src/styles/colors';
 
 .buttonContainer {
   padding-left: 10px;
 }
 
-.button {
-  border: none;
-  color: white;
-  padding: 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 10px;
+.successButton {
+  @include button.style;
+
+  background-color: colors.$success;
 
   &:focus {
     border: none;
@@ -30,65 +16,23 @@ $success: green;
   }
 
   &:hover {
-    background-color: rgb(70, 201, 70);
-    cursor: pointer;
+    background-color: colors.$successHover;
   }
 
   &:active {
-    background-color: #4caf50;
+    background-color: colors.$success;
   }
 }
 
-.deleteButton {
-  @extend .button;
-  background-color: $danger;
+.disabledButton {
+  @include button.style;
+  &:disabled {
+    background-color: colors.$danger;
+  }
 
   &:hover {
-    background-color: rgb(252, 67, 67);
-  }
-
-  &:active {
-    background-color: $danger;
+    pointer-events: none;
   }
 }
 
-.inputButton {
-  @extend .button;
-  background-color: #4caf50;
 
-  &:hover {
-    background-color: rgb(70, 201, 70);
-  }
-}
-
-.border {
-  width: 200px;
-  border-radius: 5px;
-  background: #fff;
-  border: 1px solid #ccc;
-  outline: none;
-  padding: 6px;
-}
-
-.input {
-  border-radius: 10px;
-}
-
-.inputSuccess {
-  @extend .input;
-  @extend .border;
-  border-color: green;
-  outline: green !important;
-}
-
-.inputError {
-  @extend .input;
-  @extend .border;
-  border-color: red;
-  outline: red !important;
-}
-
-textarea {
-  background-color: red;
-  padding: 50px;
-}

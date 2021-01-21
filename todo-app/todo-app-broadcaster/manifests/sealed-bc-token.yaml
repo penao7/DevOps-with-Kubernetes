@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: bot-token
+  namespace: todo-app
+spec:
+  encryptedData:
+    BOT_TOKEN: AgBqjpAT5G2JYsPhsGVdy4Ve2tY8OHWjAJlcROSlBnpaj7ZZncfxNIPzDyq+IIFyGCZMrK5L/EEpiNNk1TQJJ89hG00oOYSl5nIinYSN+P3B0u4H2CqgRDwjgnJwHCeOH8WcERTYbOl8aGpv3pswyuSGhja1y2wcVlEMmQMKlHqnmbH8TyhmjhzYQnLApheuqX8buJ6t0RIxX5WO3GCoICRjegSzGRGwv40/FsqBnb5rghNbyaWDuc+k6mksX1+xSxAJrjpXGbR+w+k9fia80TOf3534OzFr10PUN7Ywx7oZd5hMht7udZii6gQpiixrYZVQ4hsEtQocwypMf+zfeL445E1aYVNyjJ+5zFV8LkAwejpMlbXMPqOxwAkl9wej3YgtmNOgd8W1VaG6+75S6rpUkETiJz/8pqxHkTPhEi3wREQdsjGUt9SUQh1SBJz1cfsoYQfbIdGLuonCpDlJIN4TGrxwiNZ1LiuUeArBaOa0W3o+UnhkZjDsDvCIgbuCsUi1DoUMA7Dqgu49p6RyJ1TxVLQmSLhR9opLA6Y6d4e7TCnXB5hH8Q0hS1w4WDZW+oBY1s7Sorxq9TIlVtkYzyZXx9B4Q4hVeLpMn7Ay1tvxU7P6zk6qrwJ4+ZNMS7MMyBmntRlXaz4IYbYJdTckcs9LeqiVZoHkwsmsS70OagjdqhLZB9EuFYiShABThKFClhOW370rCjPWCiLjoT4MXzkwk9MICFWG3nW/vxT3It8xzYpApJwFiV2U1XVarVeG
+  template:
+    metadata:
+      creationTimestamp: null
+      name: bot-token
+      namespace: todo-app
+

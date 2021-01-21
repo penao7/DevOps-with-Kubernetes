@@ -10,7 +10,11 @@ const todoSchema = new mongoose.Schema({
     maxLength: 140,
     uniqueCaseInsensitive: true
   },
-  date: Date,
+  createdAt: {
+    type: String,
+    default: Date.now()
+  },
+  markedDoneAt: String,
   important: Boolean
 }, 
   { runValidators: true }

@@ -1,13 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1 
+kind: Rollout
 metadata:
   name: todo-frontend
-  namespace: master
+  namespace: todo-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: todo-frontend
+  strategy:
+    canary:
+      steps:
+      - setWeight: 50
+      - analysis:
+          templates:
+          - templateName: cpu-usage
   template:
     metadata:
       labels:
@@ -15,4 +22,4 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: PROJECT/IMAGE
+          image: penao7/todo-frontend-local

@@ -21,7 +21,7 @@ const client = new ApolloClient({
     }
   }),
   link: new HttpLink({
-    uri: `http://${url}`
+    uri: `http://192.168.1.198:8081/api`
   })
 })
 

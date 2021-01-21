@@ -1,4 +1,4 @@
-name: Release application
+name: Delete environment
 
 on:
   delete:
@@ -20,8 +20,11 @@ jobs:
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
         project_id: ${{ secrets.GKE_PROJECT_ID }}
-    
+
     - run: gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-    - name: Delete namespace
-      run: kubectl delete namespace ${GITHUB_REF#refs/heads/}
+    - name: delete namespace
+      run: |
+        GITHUB_EVENT_REF=$(echo ${{ github.event.ref }} | sed -e "s#refs/heads/##g")
+        kubectl delete namespace $GITHUB_EVENT_REF
+

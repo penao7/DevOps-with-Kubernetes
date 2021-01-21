@@ -1,6 +1,8 @@
 const { ApolloServer } = require('apollo-server');
 const schema = require('./schema');
 
+const db = require('../mongodb/db.js');
+
 const errorPlugin = {
 
   // Fires whenever a GraphQL request is received from a client.
@@ -31,8 +33,14 @@ const server = new ApolloServer({
   plugins: [
     errorPlugin
   ],
+  onHealthCheck: async () => {
+    try {
+      const test = await db.test();
+    } catch(err) {
+      throw err;
+    }
+  },
   formatError: (err) => {
-    console.log(err);
     if (err.message.startsWith("E11000 duplicate key error collection")) {
       return new Error('Todo already exists')
     }

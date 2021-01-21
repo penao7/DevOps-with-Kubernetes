@@ -3,8 +3,6 @@ kind: Service
 metadata: 
   name: todo-graphql
   namespace: todo-app
-    # annotations:
-    # cloud.google.com/backend-config: '{"default": "graphql-backendcfg"}'
 spec:
   type: NodePort 
   selector:
