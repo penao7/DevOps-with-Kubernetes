@@ -1,0 +1,16 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: scraper-controller-role
+rules:
+- apiGroups: [""]
+  # at the HTTP level, the name of the resource for accessing Pod
+  # objects is "pods"
+  resources: ["pods"]
+  verbs: ["get", "list", "delete"]
+- apiGroups: ["stable.dwk"]
+  resources: ["webscrapers"]
+  verbs: ["get", "list", "watch", "create", "delete"]
+- apiGroups: ["apiextensions.k8s.io"]
+  resources: ["customresourcedefinitions"]
+  verbs: ["get", "list", "create", "delete"]

@@ -1,0 +1,6 @@
+apiVersion: stable.dwk/v1
+kind: WebScraper
+metadata:
+  name: web-scraper
+spec:
+  web_url: "http://www.example.com"
