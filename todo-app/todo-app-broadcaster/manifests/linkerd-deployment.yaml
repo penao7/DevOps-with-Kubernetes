@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-broadcaster
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broadcaster
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/skip-inbound-ports: 4222,8443
+        config.linkerd.io/skip-outbound-ports: 4222,8443
+        linkerd.io/inject: enabled
+      labels:
+        app: broadcaster
+    spec:
+      containers:
+      - env:
+        - name: NATS_URL
+          value: nats://my-nats:4222
+        - name: BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              key: BOT_TOKEN
+              name: bot-token
+        - name: CHATROOM
+          valueFrom:
+            secretKeyRef:
+              key: CHATROOM
+              name: bot-token
+        image: penao7/todo-broadcaster
+        name: broadcaster
+---

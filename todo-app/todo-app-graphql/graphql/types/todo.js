@@ -1,27 +1,24 @@
 const { UserInputError } = require('apollo-server');
 const Todo = require('../../mongodb/models/Todo');
 const NATS = require('nats');
-const nc = NATS.connect({
-  url: process.env.NATS_URL || 'nats://192.168.1.198:7777'
-});
+
+const nc =  NATS.connect({ url: process.env.NATS_URL });
 
 const typeDef = `
   type Todo {
     content: String!
     important: Boolean
     done: Boolean
-    createdAt: Date
+    createdAt: String
     markedDoneAt: String
     id: ID!
-
-    scalar Date
   }
 `
 
 const resolvers = {
   Query: {
     allTodos: () => {
-      return Todo.find({})
+      return Todo.find({});
     },
     findTodo: (root, args) =>
       Todo.findOne({ id: args.id })

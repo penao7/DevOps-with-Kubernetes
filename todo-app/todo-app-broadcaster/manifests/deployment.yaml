@@ -4,7 +4,7 @@ metadata:
   name: todo-broadcaster
   namespace: todo-app
 spec:
-  replicas: 6
+  replicas: 1
   selector:
     matchLabels:
       app: broadcaster
@@ -24,3 +24,8 @@ spec:
                 secretKeyRef:
                   name: bot-token
                   key: BOT_TOKEN
+            - name: CHATROOM
+              valueFrom:
+                secretKeyRef:
+                  name: bot-token
+                  key: CHATROOM

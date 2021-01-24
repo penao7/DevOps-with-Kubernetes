@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: mongo-svc
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: root
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: ROOT_PASSWORD
+              name: mongodb-pw
+        - name: TODO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: TODO_USERNAME
+              name: mongodb-pw
+        - name: TODO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: TODO_PASSWORD
+              name: mongodb-pw
+        image: mongo:4.2.10
+        name: mongo
+        ports:
+        - containerPort: 27017
+          name: web
+        volumeMounts:
+        - mountPath: /docker-entrypoint-initdb.d
+          name: mongo-initdb
+        - mountPath: /data/db
+          name: data
+      volumes:
+      - configMap:
+          name: mongo-initdb
+        name: mongo-initdb
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      namespace: todo-app
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Mi
+---

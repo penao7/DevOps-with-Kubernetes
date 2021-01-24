@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-graphql
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-graphql
+  template:
+    metadata:
+      annotations:
+        config.linkerd.io/skip-inbound-ports: 4222,27017
+        config.linkerd.io/skip-outbound-ports: 4222,27017
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-graphql
+    spec:
+      containers:
+      - env:
+        - name: NODE_ENV
+          value: production
+        - name: TODO_USER_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: TODO_USERNAME
+              name: mongodb-pw
+        - name: TODO_USER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: TODO_PASSWORD
+              name: mongodb-pw
+        - name: NATS_URL
+          value: nats://my-nats:4222
+        image: penao7/todo-graphql
+        livenessProbe:
+          httpGet:
+            path: /.well-known/apollo/server-health
+            port: 4000
+          initialDelaySeconds: 15
+          periodSeconds: 30
+        name: graphql
+        ports:
+        - containerPort: 4000
+        readinessProbe:
+          httpGet:
+            path: /.well-known/apollo/server-health
+            port: 4000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---

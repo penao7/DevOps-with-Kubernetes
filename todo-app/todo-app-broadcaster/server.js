@@ -1,14 +1,44 @@
 const TelegramBot = require('node-telegram-bot-api');
 const NATS = require('nats');
-const nc = NATS.connect({
-  url: process.env.NATS_URL || 'nats://nats:7777:'
-});
 
-const token = "1408137041:AAHTn0x42PVFV5dhli3pS0Oif97_p2LqJSA"
+const natsConnection = async () => {
+  try {
+    await NATS.connect({ url: process.env.NATS_URL })
+    console.log('succesfully connected to NATS');
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+natsConnection();
+
+const token = process.env.BOT_TOKEN;
+const url = process.env.NATS_URL;
+const chatroom = process.env.CHATROOM;
+
+if(!chatroom) {
+  return console.log('ENV CHATROOM not provided, exiting...');
+}
+
+if(!url) {
+  return console.log('ENV NATS_URL not provided, exiting...');
+}
+
+if(!token) {
+  return console.log('ENV BOT_TOKEN not provided, exiting...');
+}
+
+console.log('TOKEN', token);
+console.log('URL', url);
+console.log('CHATROOM', chatroom);
+
+const nc = NATS.connect({
+  url: url
+});
 
 const telegram = new TelegramBot(token);
 
-const hostname = process.env.HOSTNAME || 'hostname not defined'
+const hostname = process.env.HOSTNAME;
 
 let broadcastedBy = '';
 
@@ -18,6 +48,7 @@ nc.subscribe('get_name', { queue: "broadcasters", max: 1 }, (msg) => {
 });
 
 nc.subscribe('todo_create', { queue: "broadcasters" }, (msg) => {
+  console.log('createmsg', msg);
   telegram.sendMessage(-441829368, 'Todos broadcaster\n\n' + msg + '\n\n' + broadcastedBy );
 });
 

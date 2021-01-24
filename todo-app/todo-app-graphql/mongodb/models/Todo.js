@@ -11,11 +11,12 @@ const todoSchema = new mongoose.Schema({
     uniqueCaseInsensitive: true
   },
   createdAt: {
-    type: String,
+    type: Date,
     default: Date.now()
   },
   markedDoneAt: String,
-  important: Boolean
+  important: Boolean,
+  done: Boolean
 }, 
   { runValidators: true }
 );

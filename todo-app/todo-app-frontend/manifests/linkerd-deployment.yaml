@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-frontend
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-frontend
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-frontend
+    spec:
+      containers:
+      - env:
+        - name: REACT_APP_API_URL
+          value: http:/34.117.76.96/api
+        - name: REACT_APP_IMAGE_URL
+          value: http://34.117.76.96/dailyimage
+        image: PROJECT/IMAGE
+        name: frontend
+---

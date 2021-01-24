@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-dailyimage
+  namespace: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-dailyimage
+  template:
+    metadata:
+      annotations:
+        linkerd.io/inject: enabled
+      labels:
+        app: todo-dailyimage
+    spec:
+      containers:
+      - image: PROJECT/IMAGE
+        livenessProbe:
+          httpGet:
+            path: /dailyimage
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        name: dailyimage
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /dailyimage
+            port: 8000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 150m
+            memory: 100Mi
+        volumeMounts:
+        - mountPath: /usr/app
+          name: dailyimage
+      volumes:
+      - name: dailyimage
+        persistentVolumeClaim:
+          claimName: dailyimage-claim
+---

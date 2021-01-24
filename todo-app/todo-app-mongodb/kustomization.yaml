@@ -4,4 +4,4 @@ resources:
 - manifests/sealed-mongo-secret.yaml
 - manifests/configmap.yaml
 - manifests/service.yaml
-- manifests/ss.yaml
+- manifests/linkerd-ss.yaml

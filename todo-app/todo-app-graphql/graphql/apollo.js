@@ -41,6 +41,7 @@ const server = new ApolloServer({
     }
   },
   formatError: (err) => {
+    console.log(err);
     if (err.message.startsWith("E11000 duplicate key error collection")) {
       return new Error('Todo already exists')
     }
