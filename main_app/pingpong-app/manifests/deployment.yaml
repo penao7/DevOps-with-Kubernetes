@@ -23,16 +23,25 @@ spec:
               cpu: "50m"
               memory: "50Mi"
           env:
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: db-secret
-                  key: POSTGRES_PASSWORD
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: POSTGRES_PASSWORD
           readinessProbe:
             httpGet:
               path: /
               port: 4000
             initialDelaySeconds: 5
             periodSeconds: 5
+          volumeMounts:
+            - name: db-secret
+              mountPath: "/etc/secrets"
+              readOnly: true
+      volumes:
+        - name: db-secret
+          secret:
+            secretName: db-secret
+
 
 

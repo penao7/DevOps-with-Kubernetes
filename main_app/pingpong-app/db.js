@@ -1,5 +1,7 @@
 const { Client } = require('pg');
-const password = process.env.POSTGRES_PASSWORD;
+const fs = require('fs').promises
+
+const password = process.env.POSTGRES_PASSWORD; 
 
 const client = new Client({
   user: 'postgres',
@@ -7,7 +9,9 @@ const client = new Client({
   database: 'pingpong',
   password: password,
   port: 5432,
-})
+});
+
+client.connect();
 
 const initialDBContent = async () => {
    try {
@@ -19,5 +23,23 @@ const initialDBContent = async () => {
   }
 };
 
-exports.client = client;
-exports.initialDBContent = initialDBContent;
+const output = async () => {
+  try {
+    const res = await client.query('SELECT pongs FROM pings;');
+    return res.rows[0];
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+const incrementOnGet = async () => {
+  try {
+    await client.query('UPDATE pings SET pongs = pongs + 1;');
+  } catch (err) {
+    console.log(err)
+  }
+};
+
+exports.initDB = initialDBContent;
+exports.output = output;
+exports.incrementOnGet = incrementOnGet;
