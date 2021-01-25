@@ -1,27 +1,29 @@
 const { Client } = require('pg');
-const fs = require('fs').promises
+const fs = require('fs');
 
-const password = process.env.POSTGRES_PASSWORD; 
+const password = fs.readFileSync('/etc/secrets/POSTGRES_PASSWORD', 'utf-8');
 
 const client = new Client({
   user: 'postgres',
-  host: 'db-0.postgres-svc',
+  host: 'db-0.postgres-svc.pingpongdatehash.svc.cluster.local',
   database: 'pingpong',
   password: password,
   port: 5432,
 });
-
-client.connect();
 
 const initialDBContent = async () => {
    try {
     await client.query('DROP TABLE IF EXISTS pings CASCADE');
     await client.query('CREATE TABLE pings(pongs INTEGER NOT NULL);');
     await client.query('INSERT INTO pings(pongs) VALUES (0);');
+    console.log('DB initiated');
   } catch (err) {
     console.log(err)
   }
 };
+
+client.connect();
+initialDBContent();
 
 const output = async () => {
   try {

@@ -28,7 +28,7 @@ spec:
               secretKeyRef:
                 name: db-secret
                 key: POSTGRES_PASSWORD
-          readinessProbe:
+           readinessProbe:
             httpGet:
               path: /
               port: 4000

@@ -5,10 +5,18 @@ metadata:
 spec:
   template:
     metadata:
-      name: pingpong-app-dwk-v1
+      name: pingpong-app-dwk-v5
     spec:
       containers:
         - image: penao7/pingpong
-          env:
-            - name: APP_PORT
-              value: "8081" 
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: db-secret
+              mountPath: "/etc/secrets"
+              readOnly: true
+      volumes:
+        - name: db-secret
+          secret:
+            secretName: db-secret
+
