@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express();
-const port = process.env.APP_PORT || 8081;
+const port = process.env.APP_PORT || 4000;
 const db = require('./db');
 
 app.get('/', async (req, res) => {
