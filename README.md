@@ -1,17 +1,17 @@
 # Devops with Kubernetes
 
-I this course I build three different projects:
+These are application made for [Devops with Kubernetes](https://devopswithkubernetes.com) course. I this course I built three different projects:
 
 # The Main App
 
-Consists of Date-pod & Hash-pod and PingPong-pod & postgresql pod
+Consists of Date & Hash and PingPong & postgresql pods
 
-Date pod provides every 5 seconds updating Date string and saves it to a file.
+Date provides every 5 seconds updating Date string and saves it to a file.
 
-PingPong-pod increments counter on every GET-request and stores the value to a psql database.
+PingPong increments counter on every GET-request and stores the value to a psql database.
 
-Hash-pod brings all the information together from both the date file and from the database. Additionally it 
-creates a new hash every time the date value changes in the file.
+Hash brings all the information together from both the date file and from the database. Additionally it 
+creates a new hash every time it detects a change in the date file.
 
 # Todo App "The Project"
 
