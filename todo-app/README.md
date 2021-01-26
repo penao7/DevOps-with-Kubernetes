@@ -6,6 +6,8 @@ This app was used at least for the following:
   - Testing different kinds of monitoring with [Prometheus](http://prometheus.io) and [Grafana](https://grafana.com/)
   - Using [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
   - Using [GitHub Actions](https://github.com/features/actions) for CI/CD
+    - new namespace created for every branch e.g development
+    - when the branch is merged with production and deleted from GitHub, the environment is deleted from the cluster aswell
   - Creating Service Mesh with [Linkerd](https://linkerd.io/)
   - Using [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) for storing environmental variables
   - Implementing messaging between pods with [NATS](https://nats.io/)
