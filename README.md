@@ -15,15 +15,14 @@ creates a new hash every time it detects a change in the date file.
 
 ## [Todo App "The Project"](/todo-app)
 
-This application used 5 different pods to make the app whole.
+Main features:
 
-[DailyImage](/todo-app/todo-app-dailyimage) handles fetching new image from [picsum](https://picsum.photos) every midnight using cronjob and serves it for frontend at /dailyimage endpoint.
-
-Backend for this application is made using [MongoDB](todo-app/todo-app-mongodb) as a statefulset and [GraphQL](todo-app/todo-app-graphql) as a normal deployment. Upon initialization MongoDB runs a script which creates database and secure user for GraphQL to use. 
-
-[Broadcaster](todo-app/todo-app-broadcaster) receives payloads from GraphQL trough [NATS](https://nats.io/) and forwards them as a messages to a predefined [Telegram](https://telegram.org/) group. 
-
-[Frontend](todo-app/todo-app-frontend) is implemented using React and styled with [Sass](https://sass-lang.com/). The page is served using nginx and at the same time it works as a reverse proxy for the dailyimage endpoint. The GraphQL requests are directed to /api endpoint.
+- Managing todos with CRUD operations
+- Broadcasting messages from CRUD operations to a Telegram group
+- Automatically changing image every day
+- Workflow through GitHub actions to Google Kubernetes Engine
+  - new namespace created for every branch e.g development
+  - when the branch is merged with production and deleted from GitHub, the environment is deleted from the cluster aswell
 
 ## [Web Scraper](/scraper)
 
