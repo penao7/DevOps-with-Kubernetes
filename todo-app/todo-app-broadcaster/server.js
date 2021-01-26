@@ -28,10 +28,6 @@ if(!token) {
   return console.log('ENV BOT_TOKEN not provided, exiting...');
 }
 
-console.log('TOKEN', token);
-console.log('URL', url);
-console.log('CHATROOM', chatroom);
-
 const nc = NATS.connect({
   url: url
 });
