@@ -21,8 +21,6 @@ Main features:
 - Broadcasting messages from CRUD operations to a Telegram group
 - Automatically changing image every day
 - Workflow through GitHub actions to Google Kubernetes Engine
-  - new namespace created for every branch e.g development
-  - when the branch is merged with production and deleted from GitHub, the environment is deleted from the cluster aswell
 
 ## [Web Scraper](/scraper)
 
