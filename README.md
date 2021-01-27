@@ -1,6 +1,6 @@
 # Devops with Kubernetes
 
-These are application made for [Devops with Kubernetes](https://devopswithkubernetes.com) course. In this course I built three different projects. Secrets for the applications are mainly handled by using [Sealed secrets](https://github.com/bitnami-labs/sealed-secrets) and monitoring using [Prometheus](https://prometheus.io/) together with [Grafana](https://grafana.com/).
+In this [course](https://devopswithkubernetes.com) I built three different projects:
 
 ## [The Main App](main_app)
 
