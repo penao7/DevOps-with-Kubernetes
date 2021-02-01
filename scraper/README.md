@@ -1,6 +1,6 @@
 # Web Scraper
 
-Copies contents of a web page and serves them locally
+Copies contents of a web page and serves them locally at `http://localhost:6000` endpoint.
 
 ## Usage
 
