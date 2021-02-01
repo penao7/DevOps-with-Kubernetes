@@ -1,24 +1,26 @@
-## Frontend for TodoApp
+# Frontend for TodoApp
 
-UI for Todo CRUD
+This is the client for the Todo-App.
 
-Dailyimage
-MongoDB for saving Todos via GraphQL
+## Features:
+
+- Daily changing image from `/dailyimage` endpoint, provided by [dailyimage-app](/todo-app/todo-app-dailyimage)
+- Todo CRUD
+- Todo history for marked done todos
+- When applied a CRUD function (e.g todo added), a message will be sent to a pre defined Telegram group
 
 ### Usage
 
-Intented to be deployed with kubernetes using deployment.yaml from manifests folder, which builds the frontend and serves it with nginx in a port 80.
+Can be deployed using [kustomize](https://kustomize.io/) at the root
+
+```
+$ kubectl apply -k .
+```
 
 ### Variables for docker build
 
 ```
 REACT_APP_API_URL = <GraphQL API URL>
+REACT_APP_IMAGE_URL = <URL for the dailyimage endpoint>
 ```
 
-kubectl create namespace argo-rollouts
-kubectl apply -n argo-rollouts -f https://raw.githubusercontent.com/argoproj/argo-rollouts/stable/manifests/install.yaml
-
-$helm repo add nats https://nats-io.github.io/k8s/helm/charts/
-$ helm repo update
-...
-$ helm install my-nats nats/nats
