@@ -1,6 +1,6 @@
 # PingPong-app
 
-Increases a counter on every GET request on '/' endpoint and stores the value into a PostgreSql database.
+Increases a counter on every GET request on '/' endpoint and stores the value into a [PostgreSQL](https://www.postgresql.org/) database.
 
 Connection to the database is made internally inside the cluster using headless service.
 
