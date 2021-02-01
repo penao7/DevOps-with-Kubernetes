@@ -1,13 +1,13 @@
 # Frontend for TodoApp
 
-This is the client for the Todo-App.
+This is the client for the Todo-App created by using React together with Apollo Client and styled with Sass. Form validation and handling was implemented by using [Formik](https://formik.org/docs/overview)
 
 ## Features:
 
 - Daily changing image from `/dailyimage` endpoint, provided by [dailyimage-app](/todo-app/todo-app-dailyimage)
 - Todo CRUD
 - Todo history for marked done todos
-- When applied a CRUD function (e.g todo added), a message will be sent to a pre defined Telegram group
+- When applied a CRUD function (e.g todo added), a message will be sent to a predefined Telegram group
 
 ### Usage
 
