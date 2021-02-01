@@ -6,10 +6,6 @@ Copies contents of a web page and serves them locally at `http://localhost:6000`
 
 First step is to apply required manifests using Kustomize:
 
-`
-$ kubectl apply -k .
-`
-
 ```console
 $ kubectl apply -k .
 serviceaccount/scraper-controller-account created
