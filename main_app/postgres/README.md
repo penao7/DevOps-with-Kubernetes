@@ -3,6 +3,12 @@
 This pod is deployed as a statefulset using headless service.
 Uses port `5432` by default. 
 
+Because of the headless service it is possible to connect to the database internally inside cluster by using DNS name:
+
+```
+db-0.postgres-svc.pingpongdatehash.svc.cluster.local
+```
+
 ## ENV
 
 Required environmental variables
