@@ -10,7 +10,7 @@ Provides database for Todo-App. Initially creates `todo-app` database with secur
 
 ## ENV
 
-These are deployed using secrets.
+These are deployed using [secrets](https://kubernetes.io/docs/concepts/configuration/secret/)
 
 ```
 MONGO_INITDB_ROOT_USERNAME
