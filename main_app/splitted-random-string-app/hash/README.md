@@ -1,6 +1,6 @@
 # Hash-app
 
-Brings in together all the information from [date-app](/main_app/splitted-random-string-app/date) and [pingpong-app](/main_app/pingpong-app.
+Brings in together all the information from [date-app](/main_app/splitted-random-string-app/date) and [pingpong-app](/main_app/pingpong-app).
 
 ## Functions
 
