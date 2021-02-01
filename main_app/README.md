@@ -1,8 +1,8 @@
 # Main application
 
-Main application consists of three micro services: date, hash and pingpong.
+Main application consists of three micro services: [date](/main_app/date), [hash](/main_app/hash) and [pingpong](/main_app/pingpong-app).
 
-[Date-app](/main_app/splitted-random-string-app/date) will write a current date into a file, which is stored into a shared volume with [Hash-app](/main_app/splitted-random-string-app/hash). Hash-app then reads the output from the file, which is updated every 5 secods, and combines generated hash and date as a output for the client. Additionally Hash-app will make use of postgresql and get the current `pong` count from the database which is provided by [pingpong-app](/main_app/pingpong).
+[Date-app](/main_app/date) will write the current date into a `date.txt` file every five seconds, which is stored into a volume shared with [Hash-app](/main_app/hash). Hash-app then reads the file and generates a hash and combines the date and the hash as a output for the client. Additionally Hash-app will get the current `pong` count from `http://pingpong` endpoint provided by [pingpong-app](/main_app/pingpong-app).
 
 ## ENV
 
