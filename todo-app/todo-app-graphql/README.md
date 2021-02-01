@@ -1,8 +1,22 @@
 # TodoAPP GraphQL
 
-Used to manage mongodb for todo-app
+Used to manage database queries and send messages trough [NATS](https://nats.io/) for todo-app. By default will be available at `http://localhost:4000` endpoint.
 
-## Variables needed for deploying
+## Requirements
+
+- [NATS](https://nats.io/) is required to be installed to the cluster.
+
+```bash
+$ helm repo add nats https://nats-io.github.io/k8s/helm/charts/
+  ...
+$ helm repo update
+...
+$ helm install my-nats nats/nats
+```
+
+- Working database connection (e.g with [mongodb](/todo-app/todo-app-mongodb))
+
+## ENV
 
 Credentials are set by using [secrets](https://kubernetes.io/docs/concepts/configuration/secret/) and [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets)
 
