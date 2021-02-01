@@ -14,7 +14,7 @@ clusterrolebinding.rbac.authorization.k8s.io/scraper-rolebinding created
 deployment.apps/scraper created
 ```
 
-Secondly fill in to DummySite.yaml the url to be scraped and apply. Default value is `http://www.example.com`
+Secondly fill in to DummySite.yaml the url to be scraped and apply. Default url is `http://www.example.com`.
 
 ```console
 $ kubectl apply -f manifests/DummySite.yaml
