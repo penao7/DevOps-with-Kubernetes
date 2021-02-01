@@ -2,7 +2,11 @@
 
 Main application consists of three micro services: [date](/main_app/date), [hash](/main_app/hash) and [pingpong](/main_app/pingpong-app).
 
-[Date-app](/main_app/date) will write the current date into a `date.txt` file every five seconds, which is stored into a volume shared with [Hash-app](/main_app/hash). Hash-app then reads the file and generates a hash and combines the date and the hash as a output for the client. Additionally Hash-app will get the current `pong` count from `http://pingpong` endpoint provided by [pingpong-app](/main_app/pingpong-app).
+[Date](/main_app/date) will write the current date into a `date.txt` file every five seconds, which is stored into a volume shared with [Hash-app](/main_app/hash). 
+
+[Pingpong](/main_app/pingpong-app) provides current `pong` count as a JSON-object at `http://pingpong` endpoint.
+
+[Hash](/main_app/hash) then reads the `date.txt` file, generates a hash and fetches the current `pong` count from the `http://pingpong` endpoint. Finally all the information is combined and rendered to `http://localhost:3500` endpoint.
 
 ## ENV
 
